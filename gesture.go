@@ -80,16 +80,40 @@ func init() {
 			Value: []Direction{Up, Down},
 		},
 		orderedmap.Pair[string, Gesture]{
-			Key:   "左右",
-			Value: []Direction{Left, Right},
-		},
-		orderedmap.Pair[string, Gesture]{
 			Key:   "上左",
 			Value: []Direction{Up, Left},
 		},
 		orderedmap.Pair[string, Gesture]{
 			Key:   "上右",
 			Value: []Direction{Up, Right},
+		},
+		orderedmap.Pair[string, Gesture]{
+			Key:   "左右",
+			Value: []Direction{Left, Right},
+		},
+		orderedmap.Pair[string, Gesture]{
+			Key:   "左下",
+			Value: []Direction{Left, Down},
+		},
+		orderedmap.Pair[string, Gesture]{
+			Key:   "左上",
+			Value: []Direction{Left, Up},
+		},
+		orderedmap.Pair[string, Gesture]{
+			Key:   "右左",
+			Value: []Direction{Right, Left},
+		},
+		orderedmap.Pair[string, Gesture]{
+			Key:   "右下",
+			Value: []Direction{Right, Down},
+		},
+		orderedmap.Pair[string, Gesture]{
+			Key:   "右上",
+			Value: []Direction{Right, Up},
+		},
+		orderedmap.Pair[string, Gesture]{
+			Key:   "下上",
+			Value: []Direction{Down, Up},
 		},
 		orderedmap.Pair[string, Gesture]{
 			Key:   "下左",
