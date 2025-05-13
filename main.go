@@ -6,9 +6,6 @@ type Game struct{}
 
 func (g *Game) Update() error {
 	println(ebiten.CursorPosition())
-	ebiten.SetCursorMode(ebiten.CursorModeHidden)
-	ebiten.SetCursorMode(ebiten.CursorModeVisible)
-
 	return nil
 }
 
