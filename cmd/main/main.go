@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/HMasataka/mouse_gesture/mouse"
+	mouse "github.com/HMasataka/mouse_gesture"
 	"github.com/hajimehoshi/ebiten/v2"
 )
 

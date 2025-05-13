@@ -1,6 +1,4 @@
-package mouse
-
-import "github.com/HMasataka/mouse_gesture/math"
+package mousegesture
 
 const threshold = 5
 
@@ -50,7 +48,7 @@ func (m *MouseGesture) GetDirection(pos Position) Direction {
 
 	direction := None
 
-	isX := math.Abs(m.old.X-pos.X) > math.Abs(m.old.Y-pos.Y)
+	isX := Abs(m.old.X-pos.X) > Abs(m.old.Y-pos.Y)
 
 	if isX {
 		if m.old.X-pos.X > threshold {
