@@ -3,6 +3,7 @@ package main
 import (
 	mouse "github.com/HMasataka/mouse_gesture"
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
 )
 
 type Game struct {
@@ -12,13 +13,13 @@ type Game struct {
 func (g *Game) Update() error {
 	position := mouse.NewPosition(ebiten.CursorPosition())
 
-	println(position.X, position.Y)
-
 	if ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft) {
-		println("Left mouse button pressed")
+		g.mouseGesture.Record(position)
 	}
 
-	println(g.mouseGesture.GetDirection(position))
+	if g.mouseGesture.IsEnable() && inpututil.IsMouseButtonJustReleased(ebiten.MouseButtonLeft) {
+		g.mouseGesture.Finish()
+	}
 
 	return nil
 }
@@ -32,7 +33,6 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeigh
 
 func main() {
 	var mouseGesture mouse.MouseGesture
-	mouseGesture.Enable()
 
 	if err := ebiten.RunGame(&Game{
 		mouseGesture: mouseGesture,

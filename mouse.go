@@ -1,5 +1,10 @@
 package mousegesture
 
+import (
+	"fmt"
+	"reflect"
+)
+
 const threshold = 5
 
 func NewPosition(x, y int) Position {
@@ -27,9 +32,12 @@ const (
 type MouseGesture struct {
 	isEnable bool
 	old      Position
+	gesture  Gesture
 }
 
-func (m *MouseGesture) Enable() {
+func (m *MouseGesture) Enable(startPosition Position) {
+	m.old = startPosition
+	m.gesture = Gesture{}
 	m.isEnable = true
 }
 
@@ -41,7 +49,7 @@ func (m *MouseGesture) IsEnable() bool {
 	return m.isEnable
 }
 
-func (m *MouseGesture) GetDirection(pos Position) Direction {
+func (m *MouseGesture) getDirection(pos Position) Direction {
 	if !m.isEnable {
 		return None
 	}
@@ -67,4 +75,34 @@ func (m *MouseGesture) GetDirection(pos Position) Direction {
 	m.old = pos
 
 	return direction
+}
+
+func (m *MouseGesture) Record(pos Position) {
+	if !m.isEnable {
+		m.Enable(pos)
+	}
+
+	direction := m.getDirection(pos)
+
+	if direction == None {
+		return
+	}
+
+	if len(m.gesture) > 0 && m.gesture[len(m.gesture)-1] == direction {
+		return
+	}
+
+	m.gesture = append(m.gesture, direction)
+}
+
+func (m *MouseGesture) Finish() Gesture {
+	m.Disable()
+
+	for pair := AllGestures.Oldest(); pair != nil; pair = pair.Next() {
+		if reflect.DeepEqual(pair.Value, m.gesture) {
+			fmt.Printf("%s => %v\n", pair.Key, pair.Value)
+		}
+	}
+
+	return []Direction{}
 }
