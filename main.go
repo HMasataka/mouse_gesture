@@ -1,11 +1,17 @@
 package main
 
-import "github.com/hajimehoshi/ebiten/v2"
+import (
+	"github.com/hajimehoshi/ebiten/v2"
+)
 
 type Game struct{}
 
 func (g *Game) Update() error {
 	println(ebiten.CursorPosition())
+
+	if ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft) {
+		println("Left mouse button pressed")
+	}
 	return nil
 }
 
